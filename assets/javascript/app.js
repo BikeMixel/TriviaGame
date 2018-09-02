@@ -1,78 +1,104 @@
-var time = 10
+var time = 30
 var intervalId
-var correct = 0 
+var correct = 0
 var incorrect = 0
 
 var timeHold = $("#timeLeft")
 var start = $("#startBtn")
-var showHold = $("#testArea")
+var gameHold = $("#testArea")
 var answerHold = $("#answers")
+var submit = $("#submitBtn")
 
-
-var triviaArray = {
-    questions: ["1. Who am I?","2. Where am I?","3. How am I?","4. What day is it?","5. What's my favorite color?"],
-    a: ["Mike","Hell","Ok","Tuesday","Blue"],
-    b: ["Steve","The Bathroom","Swell","Monday","Purple"],
-    c: ["Paul","Mars","Awful","Friday","Green"]
+var triviaArray = [{
+    question: "1. What is my name?",
+    userChoices: ["Mike", "Steve", "Paul"],
+},
+{
+    question: "2. Where am I?",
+    userChoices: ["Hell", "Wood Street", "The Bathroom"],
+},
+{
+    question: "3. How am I?",
+    userChoices: ["Ok", "Swell", "Awful"],
+},
+{
+    question: "4. Who's the best?",
+    userChoices: ["Me", "You", "Fairbanks"],
+},
+{
+    question: "5. What's on TV?",
+    userChoices: ["Archer", "Porn", "Baseball"],
+},
+{
+    question: "6. What's a PIG Launcher?",
+    userChoices: ["Pipe Inspection Gauge", "A device to launch pigs", "Fun"]
 }
-var questLen = triviaArray.questions.length
-var ansLen = triviaArray.a.length
+]
 
-var answers = ["Mike","The Bathroom","Swell","Friday","Green"]
-var userAns = []
+var correctAns = ["Mike", "Wood Street", "Swell", "Fairbanks", "Archer", "Pipe Inspection Gauge"]
+var userPicks = []
 
-timeHold.html("You have " + time + " to finish")
+var len = triviaArray.length
 
+timeHold.html("You have " + time + " seconds to finish")
+
+submit.on('click', final)
 start.on('click', game)
 
-function game(){
+function game() {
     run()
-    show()
+    display()
+}
+function final() {
+    timeHold.remove()
+    submit.remove()
+    end()
 }
 
-function run(){
+function run() {
     start.remove()
     clearInterval(intervalId)
     intervalId = setInterval(timer, 1000)
 }
-function timer(){
+function timer() {
     time--
     timeHold.html("You have " + time + " seconds left")
-    if(time <= 0){
+    if (time <= 0) {
         end()
     }
 }
-function end(){
+function end() {
     clearInterval(intervalId)
+    score()
+    time = 0
 }
 
-function show(){
-    for(var i = 0; i < questLen; i++){
-        showHold.append("<div>" + triviaArray.questions[i] + "</div")
-                .append("<button id='aBtn'>" + triviaArray.a[i] + "</button>")
-                .append("<button id='bBtn'>" + triviaArray.b[i] + "</button>")
-                .append("<button id='cBtn'>" + triviaArray.c[i] + "</button>")
+function display() {
+    for (var i = 0; i < len; i++) {
+        gameHold.append("<div>" + triviaArray[i].question + "</div>")
+        for (var j = 0; j < triviaArray[i].userChoices.length; j++) {
+            gameHold.append("<button type ='submit' value ='" + triviaArray[i].userChoices[j] + "'>"
+                + triviaArray[i].userChoices[j] + "</button>")
+            $("button[value='" + triviaArray[i].userChoices[j] + "']").on("click", function () {
+                console.log(userPicks)
+                userPicks.push(this.value)
+                if (correctAns.includes(this.value) === true) {
+                    correct++
+                    console.log("Correct " + correct)
+                }
+                else {
+                    incorrect++
+                    console.log("Incorrect " + incorrect)
+                }
+            })
+        }
     }
-    for (var j = 0; j < ansLen; j++)
-    $("#aBtn").on('click', function(){
-        userAns.push(triviaArray.a[j])
-        console.log(userAns)
-        $("#bBtn").remove()
-        $("#cBtn").remove()
-        $("#aBtn").css("background-color", "green")
-    })
-    $("#bBtn").on('click', function(){
-        userAns.push(triviaArray.b[j])
-        console.log(userAns)
-        $("#aBtn").remove()
-        $("#cBtn").remove()
-        $("#bBtn").css("background-color", "green")
-    })
-    $("#cBtn").on('click', function(){
-        userAns.push(triviaArray.c[j])
-        console.log(userAns)
-        $("#aBtn").remove()
-        $("#bBtn").remove()
-        $("#cBtn").css("background-color", "green")
-    })
 }
+
+function score() {
+    if (correctAns.length > userPicks.length) {
+        alert("You didn't finish!")
+    }
+    gameHold.html("You got " + correct + " out of " + correctAns.length + "!")
+}
+
