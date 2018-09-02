@@ -6,36 +6,36 @@ var incorrect = 0
 var timeHold = $("#timeLeft")
 var start = $("#startBtn")
 var gameHold = $("#testArea")
-var answerHold = $("#answers")
 var submit = $("#submitBtn")
+var endArea = $("#endArea")
 
 var triviaArray = [{
     question: "1. What is my name?",
-    userChoices: ["Mike", "Steve", "Paul"],
+    userChoices: ["Mike", "Steve", "Paul", "Eddie"],
 },
 {
     question: "2. Where am I?",
-    userChoices: ["Hell", "Wood Street", "The Bathroom"],
+    userChoices: ["Hell", "Wood Street", "The Bathroom", "Work"],
 },
 {
     question: "3. How am I?",
-    userChoices: ["Ok", "Swell", "Awful"],
+    userChoices: ["Ok", "Swell", "Awful", "Stupendous"],
 },
 {
     question: "4. Who's the best?",
-    userChoices: ["Me", "You", "Fairbanks"],
+    userChoices: ["Me", "You", "Fairbanks", "LeBron"],
 },
 {
     question: "5. What's on TV?",
-    userChoices: ["Archer", "Porn", "Baseball"],
+    userChoices: ["Archer", "Porn", "Baseball", "Synchronized Swimming"],
 },
 {
     question: "6. What's a PIG Launcher?",
-    userChoices: ["Pipe Inspection Gauge", "A device to launch pigs", "Fun"]
+    userChoices: ["Pipe Inspection Gauge", "A device to launch pigs", "Fun", "An Obscure Reference"]
 }
 ]
 
-var correctAns = ["Mike", "Wood Street", "Swell", "Fairbanks", "Archer", "Pipe Inspection Gauge"]
+var correctAns = ["Mike", "Hell", "Swell", "Fairbanks", "Archer", "An Obscure Reference"]
 var userPicks = []
 
 var len = triviaArray.length
@@ -80,15 +80,12 @@ function display() {
             gameHold.append("<button type ='submit' value ='" + triviaArray[i].userChoices[j] + "'>"
                 + triviaArray[i].userChoices[j] + "</button>")
             $("button[value='" + triviaArray[i].userChoices[j] + "']").on("click", function () {
-                console.log(userPicks)
                 userPicks.push(this.value)
                 if (correctAns.includes(this.value) === true) {
                     correct++
-                    console.log("Correct " + correct)
                 }
                 else {
                     incorrect++
-                    console.log("Incorrect " + incorrect)
                 }
             })
         }
@@ -98,7 +95,22 @@ function display() {
 function score() {
     if (correctAns.length > userPicks.length) {
         alert("You didn't finish!")
+        endArea.html("<button id ='refreshBtn'>Refresh</button>")
+        $("#refreshBtn").on("click", function(){
+            window.location.reload()
+        })
     }
-    gameHold.html("You got " + correct + " out of " + correctAns.length + "!")
-}
+    else {
+    endArea.append("<button id ='refreshBtn'>Refresh</button>")
+    $("#refreshBtn").on("click", function(){
+        window.location.reload()
+    })
+        if(correct / incorrect > .75){
+        gameHold.html("You got " + correct + " out of " + correctAns.length + "! Nice Job!!")
+        }
+        else{
+        gameHold.html("You got " + correct + " out of " + correctAns.length + "! Needs Work!!")
+        }
+    }
+  }
 
