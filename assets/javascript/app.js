@@ -100,19 +100,20 @@ function timer() {
 function end() {
     clearInterval(intervalId)
     score()
-    
+
 }
 
 function display() {
-endHold.html("<button id='submitBtn'>I'm done!</button>")
-$("#submitBtn").on("click", final)
+    endHold.html("<button id='submitBtn'>I'm done!</button>")
+    $("#submitBtn").on("click", final)
     for (var i = 0; i < triviaLen; i++) {
-        triviaHold.append("<div>" + triviaArray[i].question + "</div>")
+        triviaHold.append("<div id='divQuest'>" + triviaArray[i].question + "</div>")
         for (var j = 0; j < triviaArray[i].userChoices.length; j++) {
             triviaHold.append("<button type ='submit' id ='" + triviaArray[i].id[j] + "' value ='" + triviaArray[i].userChoices[j] + "'>"
                 + triviaArray[i].userChoices[j] + "</button>")
             $("button[value='" + triviaArray[i].userChoices[j] + "']").on("click", function () {
                 userPicks.push(this.value)
+                $(this).hide(this.id)
                 $(this).css("background-color", "green")
                 if (correctAns.includes(this.value) === true) {
                     correct++
@@ -124,27 +125,34 @@ $("#submitBtn").on("click", final)
         }
     }
 }
+function disable(){
+    if (answered = false){
+        
+    }
+}
 
 function score() {
     if (ansLen > userPicks.length) {
         alert("You didn't finish!")
         triviaHold.remove()
+        timeHold.html("Way to go! Try again.")
         endHold.html("<button id ='refreshBtn'>Retry</button>")
         $("#refreshBtn").on("click", refresh)
+        startHold.append("<img src='assets/images/Cartman_angry.jpg'>")
     }
     else {
-    endHold.html("<button id ='refreshBtn'>Retry</button>")
-    $("#refreshBtn").on("click", refresh)
-        if(correct / ansLen > .6){
+        endHold.html("<button id ='refreshBtn'>Retry</button>")
+        $("#refreshBtn").on("click", refresh)
+        if (correct / ansLen > .6) {
             triviaHold.html("You got " + correct + " out of " + ansLen + "! Killer!")
-            startHold.append("<img src='assets/images/Cartman.jpg'>")
+            startHold.append("<img src='assets/images/Cartman_happy.jpg'>")
         }
         else {
-            triviaHold.html("You got " + correct + " out of " + ansLen + "! Weak!")  
-            startHold.append("<img src='assets/images/Eric_Cartman_Crying.png'>")
+            triviaHold.html("You got " + correct + " out of " + ansLen + "! Weak!")
+            startHold.append("<img src='assets/images/Crying_Cartman.jpg'>")
         }
     }
-  }
-  function refresh(){
+}
+function refresh() {
     window.location.reload()
 }
