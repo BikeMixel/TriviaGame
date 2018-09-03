@@ -2,3 +2,10 @@ button{
     width: 225px;
     margin: 15px;
 }
+#wrapper{
+    margin-left: 225px;
+    margin-right: 225px;
+}
+body{
+    background-image: url("/assets/images/background.jpg")
+}
