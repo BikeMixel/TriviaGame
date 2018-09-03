@@ -124,7 +124,7 @@ function display() {
 
 function score() {
     if (correctAns.length > userPicks.length) {
-        // alert("You didn't finish!")
+        alert("You didn't finish!")
         endHold.html("<button id ='refreshBtn'>Refresh</button>")
         $("#refreshBtn").on("click", function(){
             window.location.reload()
