@@ -9,6 +9,7 @@ var triviaHold = $("#triviaArea")
 var textHold = $("#textArea")
 var submit = $("#submitBtn")
 var endHold = $("#endArea")
+var startHold = $("#startArea")
 
 var triviaArray = [{
     question: "1. How much money did Scott Tennorman owe Cartman?",
@@ -17,7 +18,7 @@ var triviaArray = [{
 },
 {
     question: "2. How did the child wunderkind Eric Cartman gain his psychic abilities?",
-    userChoices: ["Kyle hit him on the head", "He crashed his bicycle", "He tried to fly off his roof", "He electrocuted himself with his TiVo"],
+    userChoices: ["Kyle hit him on the head", "He crashed his bicycle", "He tried to fly off his roof", "He electrocuted himself"],
     id: ["2", "2", "2", "2"]
 },
 {
@@ -136,10 +137,11 @@ function score() {
     })
         if(correct / correctAns.length > .6){
             triviaHold.html("You got " + correct + " out of " + correctAns.length + "! Killer!")
+            startHold.append("<img src='assets/images/Cartman.jpg'>")
         }
         else {
             triviaHold.html("You got " + correct + " out of " + correctAns.length + "! Weak!")  
-            triviaHold.prepend("<img src='assets/images/Eric_Cartman_Crying.png'>")
+            startHold.append("<img src='assets/images/Eric_Cartman_Crying.png'>")
         }
     }
   }

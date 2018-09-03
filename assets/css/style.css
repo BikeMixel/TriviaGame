@@ -1,11 +1,33 @@
 button{
-    width: 225px;
+    width: 175px;
     margin: 15px;
+    font-size: 20px;
 }
 #wrapper{
     margin-left: 225px;
     margin-right: 225px;
+    background-image: url("/Users/mike/Desktop/TriviaGame/assets/images/lighter.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-body{
-    background-image: url("/assets/images/background.jpg")
+#bodyImage{
+    background-image: url("/Users/mike/Desktop/TriviaGame/assets/images/background.jpg");
+    height: 100%;
+    width: 100%;
+    position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#textArea,
+#triviaArea,
+#timeLeft{
+    font-size: 26px;
+}
+#textArea, 
+#endArea,
+#timeLeft,
+#startArea,
+#triviaArea, 
+h1 {
+    text-align: center;
 }
