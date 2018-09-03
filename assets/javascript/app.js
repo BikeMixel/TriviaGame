@@ -1,4 +1,4 @@
-var time = 3
+var time = 45
 var intervalId
 var correct = 0
 var incorrect = 0
