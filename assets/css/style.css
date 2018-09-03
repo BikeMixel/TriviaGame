@@ -6,6 +6,11 @@ button{
     background-color: steelblue;
     color: white;
 }
+h1 {
+    text-align: center;
+    text-decoration-line: underline;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 #wrapper{
     margin-left: 15%;
     margin-right: 15%;
@@ -13,6 +18,7 @@ button{
     background-repeat: no-repeat;
     background-size: cover;
 }
+/* Nice Pun */
 #bodyImage{
     background-image: url("../images/background.jpg");
     height: 100%;
@@ -31,8 +37,8 @@ button{
 #endArea,
 #timeLeft,
 #startArea,
-#triviaArea, 
-h1 {
+#triviaArea
+{
     text-align: center;
 }
 #divQuest{

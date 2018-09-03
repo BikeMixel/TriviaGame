@@ -1,4 +1,4 @@
-var time = 30
+var time = 3
 var intervalId
 var correct = 0
 var incorrect = 0
@@ -63,7 +63,7 @@ var triviaArray = [{
 },
 ]
 
-var correctAns = ["$16.12", "He tried to fly off his roof", "Mel Gibson", "Mr. Kitty", "Kenny", "Wendy", "CartmanLand", "Charles Manson", "Come Sail Away", "Family Guy",]
+var correctAns = ["$16.12", "He tried to fly off his roof", "Mel Gibson", "Mr. Kitty", "Kenny", "Wendy", "CartmanLand", "Charles Manson", "Come Sail Away", "Family Guy"]
 var userPicks = []
 
 var ansLen = correctAns.length
@@ -120,14 +120,10 @@ function display() {
                 }
                 else {
                     incorrect++
+                    $(this).css("background-color", "red")
                 }
             })
         }
-    }
-}
-function disable(){
-    if (answered = false){
-        
     }
 }
 
