@@ -66,12 +66,13 @@ var triviaArray = [{
 var correctAns = ["$16.12", "He tried to fly off his roof", "Mel Gibson", "Mr. Kitty", "Kenny", "Wendy", "CartmanLand", "Charles Manson", "Come Sail Away", "Family Guy",]
 var userPicks = []
 
-var len = triviaArray.length
+var ansLen = correctAns.length
+var triviaLen = triviaArray.length
 
 timeHold.html("You have " + time + " seconds to finish")
 
-submit.on('click', final)
 start.on('click', game)
+submit.on('click', final)
 
 function game() {
     run()
@@ -79,7 +80,7 @@ function game() {
 }
 function final() {
     timeHold.remove()
-    submit.remove()
+    $("#submitBtn").remove()
     end()
 }
 
@@ -103,16 +104,18 @@ function end() {
 }
 
 function display() {
-    for (var i = 0; i < len; i++) {
+endHold.html("<button id='submitBtn'>I'm done!</button>")
+$("#submitBtn").on("click", final)
+    for (var i = 0; i < triviaLen; i++) {
         triviaHold.append("<div>" + triviaArray[i].question + "</div>")
         for (var j = 0; j < triviaArray[i].userChoices.length; j++) {
-            triviaHold.append("<button type ='submit' class ='" + triviaArray[i].id[j] + "' value ='" + triviaArray[i].userChoices[j] + "'>"
+            triviaHold.append("<button type ='submit' id ='" + triviaArray[i].id[j] + "' value ='" + triviaArray[i].userChoices[j] + "'>"
                 + triviaArray[i].userChoices[j] + "</button>")
             $("button[value='" + triviaArray[i].userChoices[j] + "']").on("click", function () {
                 userPicks.push(this.value)
+                $(this).css("background-color", "green")
                 if (correctAns.includes(this.value) === true) {
                     correct++
-                    console.log(correct)
                 }
                 else {
                     incorrect++
@@ -123,25 +126,25 @@ function display() {
 }
 
 function score() {
-    if (correctAns.length > userPicks.length) {
+    if (ansLen > userPicks.length) {
         alert("You didn't finish!")
-        endHold.html("<button id ='refreshBtn'>Refresh</button>")
-        $("#refreshBtn").on("click", function(){
-            window.location.reload()
-        })
+        triviaHold.remove()
+        endHold.html("<button id ='refreshBtn'>Retry</button>")
+        $("#refreshBtn").on("click", refresh)
     }
     else {
-    endHold.append("<button id ='refreshBtn'>Refresh</button>")
-    $("#refreshBtn").on("click", function(){
-        window.location.reload()
-    })
-        if(correct / correctAns.length > .6){
-            triviaHold.html("You got " + correct + " out of " + correctAns.length + "! Killer!")
+    endHold.html("<button id ='refreshBtn'>Retry</button>")
+    $("#refreshBtn").on("click", refresh)
+        if(correct / ansLen > .6){
+            triviaHold.html("You got " + correct + " out of " + ansLen + "! Killer!")
             startHold.append("<img src='assets/images/Cartman.jpg'>")
         }
         else {
-            triviaHold.html("You got " + correct + " out of " + correctAns.length + "! Weak!")  
+            triviaHold.html("You got " + correct + " out of " + ansLen + "! Weak!")  
             startHold.append("<img src='assets/images/Eric_Cartman_Crying.png'>")
         }
     }
   }
+  function refresh(){
+    window.location.reload()
+}
