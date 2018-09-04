@@ -1,4 +1,4 @@
-var time = 45
+var time = 60
 var intervalId
 var correct = 0
 var incorrect = 0
@@ -103,6 +103,8 @@ function end() {
 
 }
 
+// somewhere in this block, I wanted to put something in here that would when you click a button, all other buttons with that same id 
+// would become disabled (so you can't answer the same question twice) but I couldn't figure out how to make that happen
 function display() {
     endHold.html("<button id='submitBtn'>I'm done!</button>")
     $("#submitBtn").on("click", final)
@@ -114,9 +116,9 @@ function display() {
             $("button[value='" + triviaArray[i].userChoices[j] + "']").on("click", function () {
                 userPicks.push(this.value)
                 $(this).hide(this.id)
-                $(this).css("background-color", "green")
                 if (correctAns.includes(this.value) === true) {
                     correct++
+                    $(this).css("background-color", "green")
                 }
                 else {
                     incorrect++

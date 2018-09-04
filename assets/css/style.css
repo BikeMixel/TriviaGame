@@ -6,7 +6,7 @@ button{
     background-color: steelblue;
     color: white;
 }
-h1 {
+h1{
     text-align: center;
     text-decoration-line: underline;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -37,8 +37,7 @@ h1 {
 #endArea,
 #timeLeft,
 #startArea,
-#triviaArea
-{
+#triviaArea{
     text-align: center;
 }
 #divQuest{
